@@ -1,0 +1,22 @@
+{
+  "name": "djs-template",
+  "description": "Template for a discord.js app using bun and TypeScript.",
+  "homepage": "https://github.com/archasion/djs-template#readme",
+  "version": "1.0.0",
+  "type": "module",
+  "module": "src/index.ts",
+  "repository": "github:archasion/djs-template",
+  "author": {
+    "name": "Archasion",
+    "url": "https://github.com/archasion"
+  },
+  "scripts": {
+    "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.0"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  }
+}

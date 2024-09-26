@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+	"lib": ["ESNext"],
+	"types": ["bun-types"],
+	"baseUrl": "",
+	"module": "ESNext",
+	"target": "ESNext",
+	"moduleResolution": "bundler",
+	"moduleDetection": "force",
+	"noImplicitOverride": true,
+	"noEmit": true,
+	"composite": true,
+	"strict": true,
+	"downlevelIteration": true,
+	"skipLibCheck": true,
+	"forceConsistentCasingInFileNames": true,
+	"paths": {
+	  "@/*": ["src/*"],
+	  "@data/*": ["data/*"]
+	}
+  },
+  "include": [
+	"./data/**/*.json",
+	"./src/**/*",
+	"./tests/**/*"
+  ]
+}
