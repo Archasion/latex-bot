@@ -9,12 +9,7 @@ export const DEFAULT_COMMAND_CONTEXTS: readonly InteractionContextType[] = [
 ];
 
 /** The default intents for the Discord client. */
-export const CLIENT_INTENTS: readonly GatewayIntentBits[] = [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.GuildMembers
-];
+export const CLIENT_INTENTS: readonly GatewayIntentBits[] = [];
 
 /** The default partials for the Discord client. */
 export const CLIENT_PARTIALS: Partials[] = [];

@@ -36,7 +36,7 @@ enum LatexColor {
     Yellow = "FFFF00"
 }
 
-const LATEX_RENDER_URL = "https://latex.codecogs.com/png.image?";
+export const LATEX_RENDER_URL = "https://latex.codecogs.com/png.image?";
 const mappedColorChoices: ApplicationCommandOptionChoiceData<LatexColor>[] = Object.keys(LatexColor).map(color => {
     // @ts-ignore
     const hex: LatexColor = LatexColor[color];
@@ -112,7 +112,7 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
         const backgroundColor = interaction.options.getString("background_color");
         const textColor = interaction.options.getString("text_color") ?? LatexColor.Black;
         const size: LatexFontSize = interaction.options.getInteger("size") ?? LatexFontSize.Large;
-        const strSize = Latex._mapSize(size);
+        const strSize = Latex.mapSize(size);
 
         let styleFormula = `${strSize}\\fg{${textColor}}`;
 
@@ -124,7 +124,7 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
         await interaction.reply(LATEX_RENDER_URL + encodedFormula);
     }
 
-    private static _mapSize(size: LatexFontSize): string {
+    static mapSize(size: LatexFontSize): string {
         switch (size) {
             case LatexFontSize.Tiny:
                 return "\\tiny";
@@ -140,7 +140,7 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
     }
 }
 
-enum LatexFontSize {
+export enum LatexFontSize {
     Tiny,
     Small,
     Large,
