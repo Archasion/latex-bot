@@ -4,7 +4,7 @@ import {
     ModalBuilder,
     TextInputBuilder,
     TextInputStyle,
-    ActionRowBuilder
+    ActionRowBuilder, InteractionContextType
 } from "discord.js";
 
 import Command from "@/handlers/commands/Command";
@@ -15,6 +15,11 @@ export default class LatexMultiline extends Command<ChatInputCommandInteraction>
         super({
             name: "latex-multiline",
             description: "Prompt a modal with a multiline LaTeX formula input",
+            contexts: [
+                InteractionContextType.PrivateChannel,
+                InteractionContextType.BotDM,
+                InteractionContextType.Guild
+            ],
             integrationTypes: [
                 ApplicationIntegrationType.UserInstall,
                 ApplicationIntegrationType.GuildInstall

@@ -2,7 +2,7 @@ import {
     ApplicationCommandOptionType,
     ChatInputCommandInteraction,
     ApplicationIntegrationType,
-    ApplicationCommandOptionChoiceData
+    ApplicationCommandOptionChoiceData, InteractionContextType
 } from "discord.js";
 
 import Command from "@/handlers/commands/Command";
@@ -53,6 +53,11 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
         super({
             name: "latex",
             description: "Generate a LaTeX image",
+            contexts: [
+                InteractionContextType.PrivateChannel,
+                InteractionContextType.BotDM,
+                InteractionContextType.Guild
+            ],
             integrationTypes: [
                 ApplicationIntegrationType.UserInstall,
                 ApplicationIntegrationType.GuildInstall
