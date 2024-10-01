@@ -2,7 +2,9 @@ import {
     ApplicationCommandOptionType,
     ChatInputCommandInteraction,
     ApplicationIntegrationType,
-    ApplicationCommandOptionChoiceData, InteractionContextType
+    ApplicationCommandOptionChoiceData,
+    InteractionContextType,
+    PermissionFlagsBits
 } from "discord.js";
 
 import Command from "@/handlers/commands/Command";
@@ -113,6 +115,14 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
     }
 
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+        if (!canClientEmbed(interaction)) {
+            await interaction.reply({
+                content: "I need the `Embed Links` permission to generate LaTeX images.",
+                ephemeral: true
+            });
+            return;
+        }
+
         const formula = interaction.options.getString("formula", true);
         const backgroundColor = interaction.options.getString("background_color");
         const textColor = interaction.options.getString("text_color") ?? LatexColor.Black;
@@ -143,6 +153,15 @@ export default class Latex extends Command<ChatInputCommandInteraction> {
                 return "\\huge";
         }
     }
+}
+
+export function canClientEmbed(interaction: ChatInputCommandInteraction): boolean {
+    if (!interaction.inCachedGuild()) return true;
+    if (!interaction.channel!.isTextBased()) return false;
+    if (!interaction.guild.members.me) return false;
+
+    const permissions = interaction.channel.permissionsFor(interaction.guild.members.me);
+    return permissions.has(PermissionFlagsBits.EmbedLinks);
 }
 
 export enum LatexFontSize {

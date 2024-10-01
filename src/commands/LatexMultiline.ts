@@ -4,8 +4,11 @@ import {
     ModalBuilder,
     TextInputBuilder,
     TextInputStyle,
-    ActionRowBuilder, InteractionContextType
+    ActionRowBuilder,
+    InteractionContextType
 } from "discord.js";
+
+import { canClientEmbed } from "@/commands/Latex";
 
 import Command from "@/handlers/commands/Command";
 
@@ -28,6 +31,14 @@ export default class LatexMultiline extends Command<ChatInputCommandInteraction>
     }
 
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
+        if (!canClientEmbed(interaction)) {
+            await interaction.reply({
+                content: "I need the `Embed Links` permission to generate LaTeX images.",
+                ephemeral: true
+            });
+            return;
+        }
+
         const formulaInput = new TextInputBuilder()
             .setCustomId("formula")
             .setLabel("LaTeX Formula")
